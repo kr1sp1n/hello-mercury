@@ -1,53 +1,31 @@
+'use strict';
+
+var document = require('global/document');
 var hg = require('mercury');
 var h = require('mercury').h;
 
-function Foo(initialState) {
+function App() {
     return hg.state({
-        bars: hg.array(initialState.bars, createBar),
+        value: hg.value(0),
         channels: {
-            addBar: Foo.addBar
+            clicks: incrementCounter
         }
     });
+}
 
-    function createBar(x) {
-        return hg.struct({
-            id: hg.value(x.id),
-            bar: hg.value(x.bar)
+function incrementCounter(state) {
+    state.value.set(state.value() + 1);
+}
+
+App.render = function render(state) {
+    return h('div.counter', [
+        'The state ', h('code', 'clickCount'),
+        ' has value: ' + state.value + '.', h('input.button', {
+            type: 'button',
+            value: 'Click me!',
+            'ev-click': hg.send(state.channels.clicks)
         })
-    }
-}
-
-Foo.addBar = function addBar(state) {
-    state.bars.push({
-        id: 2,
-        bar: Math.round(Math.random() * 1000)
-    });
+    ]);
 };
 
-Foo.render = function render(state) {
-    return h('div', state.bars.map(renderBar))
-
-    function renderBar(bar) {
-        return h('div', {
-            'attributes': {
-                'data-foo-id': bar.id
-            },
-            'style': {
-                'margin': '10px',
-                'background': '#ececec',
-                'padding': '5px',
-                'cursor': 'pointer',
-                'display': 'inline-block'
-            },
-            'ev-click': hg.send(state.channels.addBar)
-        });
-    }
-};
-
-function main() {
-    hg.app(document.body, Foo({
-        bars: [{ id: 2, bar: 135 }]
-    }), Foo.render);
-}
-
-main();
+hg.app(document.body, App(), App.render);
