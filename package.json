@@ -1,0 +1,31 @@
+{
+  "name": "hello-mercury",
+  "version": "0.0.1",
+  "description": "Learning mercury",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "$(npm bin)/browserify app.js -o bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kr1sp1n/hello-mercury.git"
+  },
+  "keywords": [
+    "mercury",
+    "example"
+  ],
+  "author": "kr1sp1n",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kr1sp1n/hello-mercury/issues"
+  },
+  "homepage": "https://github.com/kr1sp1n/hello-mercury",
+  "devDependencies": {
+    "browserify": "^11.2.0"
+  },
+  "dependencies": {
+    "global": "^4.3.0",
+    "mercury": "^14.0.0"
+  }
+}

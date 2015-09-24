@@ -1,31 +1,22 @@
 'use strict';
 
+// node-style includes (get's processed with browserify)
 var document = require('global/document');
 var hg = require('mercury');
 var h = require('mercury').h;
 
+// define internal state (analogous to a model in mvc)
 function App() {
-    return hg.state({
-        value: hg.value(0),
-        channels: {
-            clicks: incrementCounter
-        }
-    });
+  return hg.state({
+    value: "Hello Mercury!"
+  });
 }
 
-function incrementCounter(state) {
-    state.value.set(state.value() + 1);
+// render virtual-dom from the internal state
+App.render = function render(state){
+  // create a virtual-dom `h1` element containing "Hello Mercury!"
+  return h('h1', state.value);
 }
 
-App.render = function render(state) {
-    return h('div.counter', [
-        'The state ', h('code', 'clickCount'),
-        ' has value: ' + state.value + '.', h('input.button', {
-            type: 'button',
-            value: 'Click me!',
-            'ev-click': hg.send(state.channels.clicks)
-        })
-    ]);
-};
-
+// mount the virtual-dom on the html document body
 hg.app(document.body, App(), App.render);
