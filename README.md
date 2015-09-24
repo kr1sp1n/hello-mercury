@@ -1,0 +1,2 @@
+# hello-mercury
+Learning mercury
