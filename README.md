@@ -1,5 +1,7 @@
 # hello-mercury
 
+Learning [mercury] (A truly modular frontend framework).
+
 ## Install
 
 ```bash
@@ -14,3 +16,10 @@ npm install
 npm run build
 open index.html
 ```
+
+## Links
+
+* [mercury] - A truly modular frontend framework
+
+
+[mercury]: https://github.com/Raynos/mercury
