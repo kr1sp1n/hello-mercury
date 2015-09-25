@@ -1,6 +1,6 @@
 # hello-mercury
 
-Learning [mercury] (A truly modular frontend framework).
+Learning [mercury]
 
 ## Install
 
