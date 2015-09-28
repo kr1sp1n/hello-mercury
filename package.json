@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "$(npm bin)/browserify app.js -o bundle.js"
+    "build": "$(npm bin)/browserify browser.js -o bundle.js",
+    "hot-browserify": "npm run http-server && npm run watchify",
+    "http-server": "http-server -c 1 -a localhost &",
+    "watchify": "watchify -p browserify-hmr browser.js -o bundle.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,10 @@
   },
   "homepage": "https://github.com/kr1sp1n/hello-mercury",
   "devDependencies": {
-    "browserify": "^11.2.0"
+    "browserify": "^11.2.0",
+    "browserify-hmr": "^0.2.2",
+    "http-server": "^0.8.4",
+    "watchify": "^3.4.0"
   },
   "dependencies": {
     "global": "^4.3.0",

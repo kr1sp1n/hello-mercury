@@ -1,15 +1,17 @@
 'use strict';
 
-// node-style includes (get's processed with browserify)
-var document = require('global/document');
 var hg = require('mercury');
-var h = require('mercury').h;
+var h = hg.h;
 
-// define internal state (analogous to a model in mvc)
+function setTitle(state, data) {
+  state.title.set(data.title);
+}
+
 function App() {
   var state = hg.struct({
     title: hg.value('Mercury'),
-    handles: hg.value(null)
+    handles: hg.value(null),
+    _hotVersion: hg.value(0)
   });
 
   state.handles.set(hg.handles({
@@ -19,29 +21,4 @@ function App() {
   return state;
 }
 
-function setTitle(state, data) {
-  state.title.set(data.title);
-}
-
-function inputBox(value, sink) {
-  return h('input', {
-    value: value,
-    name: 'title',
-    type: 'text',
-    'ev-event': hg.changeEvent(sink)
-  });
-}
-
-// render virtual-dom from the internal state
-App.render = function render(state){
-  return h('div', [
-    h('h1', 'Hello ' + state.title + '!'),
-    h('p', [
-        'Change it here: ',
-        inputBox(state.title, state.handles.change)
-    ])
-  ]);
-}
-
-// mount the virtual-dom on the html document body
-hg.app(document.body, App(), App.render);
+module.exports = App;
