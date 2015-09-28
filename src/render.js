@@ -3,13 +3,13 @@
 var hg = require('mercury');
 var h = hg.h;
 
-function inputBox(value, sink) {
+function inputBox(value, channel) {
   return h('input', {
     value: value,
     name: 'title',
     type: 'text',
-    'ev-event': hg.changeEvent(sink)
-  });
+    'ev-event': hg.sendChange(channel)
+  });``
 }
 
 module.exports = function render(state) {
@@ -17,7 +17,7 @@ module.exports = function render(state) {
     h('h1', 'Hello ' + state.title + '!'),
     h('p', [
         'Change it here: ',
-        inputBox(state.title, state.handles.change)
+        inputBox(state.title, state.channels.change)
     ])
   ]);
 };
