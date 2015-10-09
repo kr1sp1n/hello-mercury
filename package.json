@@ -5,7 +5,7 @@
   "main": "src/browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hot-webpack": "webpack-dev-server --port 8080 --hot --progress --colors --inline ./src/browser.js"
+    "hot": "webpack-dev-server --port 8080 --hot --progress --colors --inline ./src/browser.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "global": "^4.3.0",
-    "mercury": "^14.0.0"
+    "mercury": "^14.0.0",
+    "observify": "^1.1.2"
   }
 }
